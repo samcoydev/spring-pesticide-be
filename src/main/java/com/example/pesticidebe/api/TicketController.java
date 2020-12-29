@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
+// THIS IS WHERE WE DEFINE ROUTING FOR /TICKET
+
 @RequestMapping("api/v1/ticket")
 @RestController
 public class TicketController {
@@ -32,18 +34,18 @@ public class TicketController {
     }
 
     @GetMapping(path = "{id}")
-    public Ticket getTicketById(@PathVariable("id") UUID id) {
+    public Ticket getTicketById(@PathVariable("id") int id) {
         return ticketService.getTicketById(id)
                 .orElse( null);
     }
 
     @DeleteMapping(path="{id}")
-    public void deleteTicketById(@PathVariable("id") UUID id) {
+    public void deleteTicketById(@PathVariable("id") int id) {
         ticketService.deleteTicket(id);
     }
 
     @PutMapping(path="{id}")
-    public void updateTicket(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Ticket ticketToUpdate) {
+    public void updateTicket(@PathVariable("id") int id, @Valid @NonNull @RequestBody Ticket ticketToUpdate) {
         ticketService.updateTicket(id, ticketToUpdate);
     }
 }

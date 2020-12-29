@@ -4,26 +4,34 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 import javax.validation.constraints.NotBlank;
-import java.util.UUID;
+
+// THIS IS THE MODEL OF WHAT A TICKET SHOULD BE!
 
 public class Ticket {
 
-    private final UUID id;
+    private final long id;
 
     @NotBlank
     private final String title;
+    private String description = "";
 
-    public Ticket(@JsonProperty("id") UUID id,
-                  @JsonProperty("title") String title) {
+    public Ticket(@JsonProperty("id") long id,
+                  @JsonProperty("title") String title,
+                  @JsonProperty("description") String description) {
         this.id = id;
         this.title = title;
+        this.description = description;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

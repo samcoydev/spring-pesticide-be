@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
+// THIS IS INTERACTING WITH OUR DATABASE "OUR DAO"
 
 @Service
 public class TicketService {
@@ -20,7 +21,7 @@ public class TicketService {
         this.ticketDao = ticketDao;
     }
 
-    public int addTicket(Ticket ticket) {
+    public long addTicket(Ticket ticket) {
         return ticketDao.insertTicket(ticket);
     }
 
@@ -28,15 +29,15 @@ public class TicketService {
         return ticketDao.selectAllTickets();
     }
 
-    public Optional<Ticket> getTicketById(UUID id) {
+    public Optional<Ticket> getTicketById(int id) {
         return ticketDao.selectTicketById(id);
     }
 
-    public int deleteTicket(UUID id) {
+    public long deleteTicket(int id) {
         return ticketDao.deleteTicketById(id);
     }
 
-    public int updateTicket(UUID id, Ticket newTicket) {
+    public long updateTicket(int id, Ticket newTicket) {
         return ticketDao.updateTicketById(id, newTicket);
     }
 

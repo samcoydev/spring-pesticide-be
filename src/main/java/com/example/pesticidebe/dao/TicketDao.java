@@ -4,23 +4,24 @@ import com.example.pesticidebe.model.Ticket;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
+// What is the point of having this?
 
 public interface TicketDao {
 
-    int insertTicket(UUID id, Ticket ticket);
+    long insertTicket(long id, Ticket ticket, String description);
 
-    default int insertTicket(Ticket ticket) {
-        UUID id = UUID.randomUUID();
-        return insertTicket(id, ticket);
+    default long insertTicket(Ticket ticket) {
+        long id = selectAllTickets().stream().count();
+        return insertTicket(id, ticket, ticket.getDescription());
     }
 
     List<Ticket> selectAllTickets();
 
-    Optional<Ticket> selectTicketById(UUID id);
+    Optional<Ticket> selectTicketById(long id);
 
-    int deleteTicketById(UUID id);
+    long deleteTicketById(long id);
 
-    int updateTicketById(UUID id, Ticket ticket);
+    long updateTicketById(long id, Ticket ticket);
 
 }
