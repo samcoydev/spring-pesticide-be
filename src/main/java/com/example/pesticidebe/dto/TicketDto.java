@@ -1,38 +1,30 @@
-package com.example.pesticidebe.model;
+package com.example.pesticidebe.dto;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Entity
-@Table(name = "tickets")
-public class Ticket {
+public class TicketDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "title")
+    @NotNull(message="Title cannot be empty")
     private String title;
 
-    @Column(name = "description")
+    @NotNull(message="Description cannot be empty")
     private String description;
 
-    @Column(name = "timestamp")
+    @NotNull(message="Must have a timestamp")
     private Date timestamp;
 
-    @Column(name = "assigned_username")
     private String assignedUsername;
 
-    @Column(name = "creator")
+    @NotNull(message="Must have a creator")
     private String creator;
 
-    @Column(name = "priority_level")
     private int priorityLevel;
 
-    @Column(name = "deadline")
     private Date deadline;
 
-    @Column(name = "status")
     private int status;
 
     public long getId() {
@@ -109,7 +101,7 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" +
+        return "TicketDto{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +

@@ -1,27 +1,17 @@
 package com.example.pesticidebe.dao;
 
 import com.example.pesticidebe.model.Ticket;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-// What is the point of having this?
+@Repository
+public interface TicketDao extends CrudRepository<Ticket, Long> {
 
-public interface TicketDao {
+    Set<Ticket> findByOrderById();
 
-    long insertTicket(long id, Ticket ticket, String description);
-
-    default long insertTicket(Ticket ticket) {
-        long id = selectAllTickets().stream().count();
-        return insertTicket(id, ticket, ticket.getDescription());
-    }
-
-    List<Ticket> selectAllTickets();
-
-    Optional<Ticket> selectTicketById(long id);
-
-    long deleteTicketById(long id);
-
-    long updateTicketById(long id, Ticket ticket);
+    Optional<Ticket> findById(Long id);
 
 }
