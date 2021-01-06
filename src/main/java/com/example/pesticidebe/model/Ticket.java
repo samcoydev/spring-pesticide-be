@@ -8,7 +8,7 @@ import java.util.Date;
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "title")
@@ -27,7 +27,7 @@ public class Ticket {
     private String creator;
 
     @Column(name = "priority_level")
-    private int priorityLevel;
+    private int prioritylevel;
 
     @Column(name = "deadline")
     private Date deadline;
@@ -84,11 +84,11 @@ public class Ticket {
     }
 
     public int getPriorityLevel() {
-        return priorityLevel;
+        return prioritylevel;
     }
 
-    public void setPriorityLevel(int priorityLevel) {
-        this.priorityLevel = priorityLevel;
+    public void setPriorityLevel(int prioritylevel) {
+        this.prioritylevel = prioritylevel;
     }
 
     public Date getDeadline() {
@@ -116,7 +116,7 @@ public class Ticket {
                 ", timestamp=" + timestamp +
                 ", assignedUsername='" + assignedUsername + '\'' +
                 ", creator='" + creator + '\'' +
-                ", priorityLevel=" + priorityLevel +
+                ", prioritylevel=" + prioritylevel +
                 ", deadline=" + deadline +
                 ", status=" + status +
                 '}';

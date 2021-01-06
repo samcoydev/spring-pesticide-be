@@ -21,7 +21,7 @@ public class TicketDto {
     @NotNull(message="Must have a creator")
     private String creator;
 
-    private int priorityLevel;
+    private int prioritylevel;
 
     private Date deadline;
 
@@ -76,11 +76,11 @@ public class TicketDto {
     }
 
     public int getPriorityLevel() {
-        return priorityLevel;
+        return prioritylevel;
     }
 
-    public void setPriorityLevel(int priorityLevel) {
-        this.priorityLevel = priorityLevel;
+    public void setPriorityLevel(int prioritylevel) {
+        this.prioritylevel = prioritylevel;
     }
 
     public Date getDeadline() {
@@ -108,7 +108,7 @@ public class TicketDto {
                 ", timestamp=" + timestamp +
                 ", assignedUsername='" + assignedUsername + '\'' +
                 ", creator='" + creator + '\'' +
-                ", priorityLevel=" + priorityLevel +
+                ", prioritylevel=" + prioritylevel +
                 ", deadline=" + deadline +
                 ", status=" + status +
                 '}';
