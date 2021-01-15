@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin(origins = "localhost:4200")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("api/v1/ticket")
 @Table(name = "tickets")
 @RestController
