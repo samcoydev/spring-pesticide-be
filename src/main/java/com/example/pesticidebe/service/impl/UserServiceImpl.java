@@ -57,26 +57,21 @@ public class UserServiceImpl implements UserService {
     public User authenticate(UserDto user) {
         User userLoggingIn = new User();
         userLoggingIn.setUsername(user.getUsername());
-        if(StringUtils.isNotEmpty(user.getPassword())) {
-            userLoggingIn.setPassword(bcryptEncoder.encode(user.getPassword()));
-        }
+        userLoggingIn.setPassword(user.getPassword());
 
         User dbUser = findByUsername(userLoggingIn.getUsername());
         if(dbUser == null) {
             System.out.println("Uh oh! something when wrong");
             return null;
         }
-        if (userLoggingIn.getPassword() == dbUser.getPassword()) {
-            System.out.println("Succesful login! Passwords match");
-            System.out.println("Userinfo: " + userLoggingIn.getPassword());
-            System.out.println("DBUser: " + dbUser.getPassword());
+
+        if(bcryptEncoder.matches(userLoggingIn.getPassword(), dbUser.getPassword())) {
+            System.out.println("Passwords match!");
+            return dbUser;
         } else {
-            System.out.println("Passwords dont match! For shame..");
-            System.out.println("Userinfo: " + userLoggingIn.getPassword());
-            System.out.println("DBUser: " + dbUser.getPassword());
+            System.out.println("Passwords don't match!");
             return null;
         }
-        return dbUser;
     }
 
 }
