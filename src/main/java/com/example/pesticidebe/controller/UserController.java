@@ -31,4 +31,10 @@ public class UserController {
         return userService.save(user);
     }
 
+    @PostMapping(path = "/authenticate")
+    public User authenticateUser(@Valid @RequestBody UserDto user) {
+        System.out.println("authenticating user");
+        return userService.authenticate(user);
+    }
+
 }

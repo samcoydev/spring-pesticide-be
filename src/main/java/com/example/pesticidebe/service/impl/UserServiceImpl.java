@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
-    //@Override
+    @Override
     public void delete(long id) {
         User u = userDao.findById(id).get();
         userDao.delete(u);
@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) { return userDao.findById(id).get(); }
+
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username).get();
+    }
 
     public User save(UserDto user) {
         User newUser = new User();
@@ -47,6 +52,31 @@ public class UserServiceImpl implements UserService {
         newUser.setEmail(user.getEmail());
 
         return userDao.save(newUser);
+    }
+
+    public User authenticate(UserDto user) {
+        User userLoggingIn = new User();
+        userLoggingIn.setUsername(user.getUsername());
+        if(StringUtils.isNotEmpty(user.getPassword())) {
+            userLoggingIn.setPassword(bcryptEncoder.encode(user.getPassword()));
+        }
+
+        User dbUser = findByUsername(userLoggingIn.getUsername());
+        if(dbUser == null) {
+            System.out.println("Uh oh! something when wrong");
+            return null;
+        }
+        if (userLoggingIn.getPassword() == dbUser.getPassword()) {
+            System.out.println("Succesful login! Passwords match");
+            System.out.println("Userinfo: " + userLoggingIn.getPassword());
+            System.out.println("DBUser: " + dbUser.getPassword());
+        } else {
+            System.out.println("Passwords dont match! For shame..");
+            System.out.println("Userinfo: " + userLoggingIn.getPassword());
+            System.out.println("DBUser: " + dbUser.getPassword());
+            return null;
+        }
+        return dbUser;
     }
 
 }
